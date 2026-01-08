@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Vintage Shop</title>
+    <link href="vintage-shop-dfc777.webflow.shared.2ce141050.css" rel="stylesheet" type="text/css">
+    <link href="bidding.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; margin: 0; }
+        
+        /* Navigation */
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            background: #2d3436;
+            color: white;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav-logo svg {
+            width: 36px;
+            height: 36px;
+        }
+        
+        .nav-logo span {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            opacity: 1;
+        }
+        
+        .nav-cta {
+            padding: 10px 25px;
+            background: #e17055;
+            color: white;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .nav-cta:hover {
+            background: #d35400;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* About Content */
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        
+        .about-section {
+            margin-bottom: 60px;
+        }
+        
+        .about-section h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            color: #2d3436;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .about-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #e17055;
+            border-radius: 2px;
+        }
+        
+        .about-section p {
+            color: #636e72;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        /* Story Grid */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin: 60px 0;
+        }
+        
+        .story-image {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        /* Values */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .value-card {
+            background: #f5f6fa;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .value-card h3 {
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+        
+        .value-card p {
+            color: #636e72;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e17055, #d35400);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .team-member h4 {
+            color: #2d3436;
+            margin-bottom: 5px;
+        }
+        
+        .team-member p {
+            color: #636e72;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        /* Stats */
+        .stats-section {
+            background: #2d3436;
+            color: white;
+            padding: 60px 20px;
+            margin: 60px 0;
+            border-radius: 20px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 30px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .stat-item h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            color: #e17055;
+            margin-bottom: 5px;
+        }
+        
+        .stat-item p {
+            opacity: 0.8;
+            margin: 0;
+        }
+        
+        /* Contact CTA */
+        .contact-cta {
+            background: linear-gradient(135deg, #e17055 0%, #d35400 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .contact-cta h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .contact-cta p {
+            opacity: 0.9;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: white;
+            color: #e17055;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #2d3436;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer p {
+            opacity: 0.7;
+            margin: 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-header h1 { font-size: 2.2rem; }
+            .main-nav { padding: 15px 20px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="main-nav" style="max-width: 100%; background: #2d3436;">
+        <a href="index.html" class="nav-logo">
+            <svg viewBox="0 0 33 33" fill="currentColor">
+                <path d="M28,0H5C2.24,0,0,2.24,0,5v23c0,2.76,2.24,5,5,5h23c2.76,0,5-2.24,5-5V5c0-2.76-2.24-5-5-5ZM29,17c-6.63,0-12,5.37-12,12h-1c0-6.63-5.37-12-12-12v-1c6.63,0,12-5.37,12-12h1c0,6.63,5.37,12,12,12v1Z"></path>
+            </svg>
+            <span>Vintage Shop</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="bidding.html">Live Auctions</a>
+            <a href="about.html" class="active">About</a>
+            <a href="bidding.html" class="nav-cta">Start Bidding</a>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>About Vintage Shop</h1>
+        <p>Connecting vintage lovers worldwide through the thrill of discovery and the joy of collecting</p>
+    </header>
+
+    <!-- About Content -->
+    <main class="about-content">
+        <!-- Our Story -->
+        <section class="about-section">
+            <h2>Our Story</h2>
+            <p>
+                Vintage Shop was born from a simple idea: everyone deserves access to unique, authentic vintage treasures. 
+                What started as a small community of collectors in 2020 has grown into a thriving global marketplace 
+                where thousands of vintage enthusiasts come together to buy, sell, and share their passion.
+            </p>
+            <p>
+                We believe that every vintage item carries a piece of history, a story waiting to be continued. 
+                Our mission is to preserve these stories by connecting items with people who will cherish them 
+                for generations to come.
+            </p>
+        </section>
+
+        <div class="story-grid">
+            <div class="story-image">
+                <img src="6864f824b444ac66536ff5ba_8171c518-acbf-494f-baf9-ec8c8128ff59.avif" alt="Vintage collection">
+            </div>
+            <div>
+                <h2 style="font-family: 'Syne', sans-serif; color: #2d3436; margin-bottom: 20px;">More Than a Marketplace</h2>
+                <p style="color: #636e72; line-height: 1.8;">
+                    We're a community of passionate collectors, history buffs, and treasure hunters. 
+                    Every auction is an opportunity to discover something extraordinary, and every 
+                    seller is a curator of memories.
+                </p>
+                <p style="color: #636e72; line-height: 1.8;">
+                    Our real-time bidding system brings the excitement of traditional auctions to your 
+                    fingertips, while our verification process ensures you're always getting authentic pieces.
+                </p>
+            </div>
+        </div>
+
+        <!-- Our Values -->
+        <section class="about-section">
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">✨</div>
+                    <h3>Authenticity</h3>
+                    <p>Every item is verified to ensure you receive genuine vintage pieces with real history.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Community</h3>
+                    <p>We foster connections between collectors who share a passion for preserving the past.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🛡️</div>
+                    <h3>Trust</h3>
+                    <p>Secure transactions and buyer protection give you peace of mind with every purchase.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌱</div>
+                    <h3>Sustainability</h3>
+                    <p>By giving vintage items new life, we promote sustainable consumption and reduce waste.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>50K+</h3>
+                    <p>Active Members</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100K+</h3>
+                    <p>Items Sold</p>
+                </div>
+                <div class="stat-item">
+                    <h3>25+</h3>
+                    <p>Countries</p>
+                </div>
+                <div class="stat-item">
+                    <h3>98%</h3>
+                    <p>Satisfaction Rate</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team -->
+        <section class="about-section">
+            <h2>Meet Our Team</h2>
+            <p>
+                Behind Vintage Shop is a dedicated team of vintage enthusiasts, tech experts, and customer 
+                champions working together to create the best experience for our community.
+            </p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-avatar">👩‍💼</div>
+                    <h4>Sarah Mitchell</h4>
+                    <p>Founder & CEO</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">👨‍💻</div>
+                    <h4>James Chen</h4>
+                    <p>Head of Technology</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">👩‍🎨</div>
+                    <h4>Emma Rodriguez</h4>
+                    <p>Creative Director</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">👨‍🔬</div>
+                    <h4>Michael Park</h4>
+                    <p>Authentication Expert</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section class="contact-cta">
+            <h2>Have Questions?</h2>
+            <p>We'd love to hear from you. Our team is always ready to help.</p>
+            <a href="mailto:hello@vintageshop.com" class="contact-btn">Contact Us</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Vintage Shop. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Shop - Live Auctions</title>
+    <link href="vintage-shop-dfc777.webflow.shared.2ce141050.css" rel="stylesheet" type="text/css">
+    <link href="bidding.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav is-accent-primary">
+        <div class="nav_container" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; max-width: 1400px; margin: 0 auto;">
+            <div class="nav_left">
+                <a href="index.html" class="nav_logo w-inline-block" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit;">
+                    <div class="nav_logo-icon" style="width: 32px; height: 32px;">
+                        <svg width="100%" height="100%" viewBox="0 0 33 33" preserveAspectRatio="xMidYMid meet">
+                            <path d="M28,0H5C2.24,0,0,2.24,0,5v23c0,2.76,2.24,5,5,5h23c2.76,0,5-2.24,5-5V5c0-2.76-2.24-5-5-5ZM29,17c-6.63,0-12,5.37-12,12h-1c0-6.63-5.37-12-12-12v-1c6.63,0,12-5.37,12-12h1c0,6.63,5.37,12,12,12v1Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <div style="font-size: 1.2rem; font-weight: 600;">Vintage Shop</div>
+                </a>
+            </div>
+            <div class="nav_center" style="display: flex; gap: 30px;">
+                <a href="index.html" style="color: inherit; text-decoration: none; opacity: 0.8;">Home</a>
+                <a href="bidding.html" style="color: inherit; text-decoration: none; font-weight: 600;">Live Auctions</a>
+                <a href="about.html" style="color: inherit; text-decoration: none; opacity: 0.8;">About</a>
+            </div>
+            <div class="nav_right nav-actions">
+                <button class="sell-btn" id="sellBtn">+ Sell Item</button>
+                <button class="button on-accent-primary" id="authBtn" style="padding: 10px 20px; border-radius: 25px;">Login / Register</button>
+                <div class="user-menu" id="userMenu" style="display: none;">
+                    <span class="user-name" id="userName"></span>
+                    <button id="logoutBtn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Bidding Section -->
+    <section class="bidding-section">
+        <div class="bidding-container">
+            <div class="section-header">
+                <h2>Live Auctions</h2>
+                <p>Discover unique vintage treasures and place your bids in real-time</p>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls-bar">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">All Auctions</button>
+                    <button class="filter-btn" data-filter="ending-soon">Ending Soon</button>
+                    <button class="filter-btn" data-filter="my-bids">My Bids</button>
+                    <button class="filter-btn" data-filter="my-auctions">My Listings</button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search auctions...">
+                </div>
+            </div>
+
+            <!-- Auctions Grid -->
+            <div class="auctions-grid" id="auctionsGrid">
+                <!-- Auctions will be rendered here by JavaScript -->
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Welcome Back</h2>
+                <button class="modal-close" id="closeAuthModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Login Form -->
+                <div id="loginFormContainer">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" required placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" required placeholder="Your password">
+                        </div>
+                        <button type="submit" class="submit-btn">Login</button>
+                        <div style="text-align: center; margin: 15px 0; color: #636e72;">or</div>
+                        <button type="button" id="googleSignIn" class="submit-btn" style="background: #4285f4;">
+                            <span style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                                Sign in with Google
+                            </span>
+                        </button>
+                    </form>
+                    <div class="auth-toggle">
+                        Don't have an account? <a href="#" id="showRegister">Register here</a>
+                    </div>
+                </div>
+                
+                <!-- Register Form -->
+                <div id="registerFormContainer" style="display: none;">
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="registerName">Full Name</label>
+                            <input type="text" id="registerName" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">Email</label>
+                            <input type="email" id="registerEmail" required placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Password</label>
+                            <input type="password" id="registerPassword" required minlength="6" placeholder="Min 6 characters">
+                        </div>
+                        <button type="submit" class="submit-btn">Create Account</button>
+                        <div style="text-align: center; margin: 15px 0; color: #636e72;">or</div>
+                        <button type="button" id="googleSignInRegister" class="submit-btn" style="background: #4285f4;">
+                            <span style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                                Sign up with Google
+                            </span>
+                        </button>
+                    </form>
+                    <div class="auth-toggle">
+                        Already have an account? <a href="#" id="showLogin">Login here</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sell Item Modal -->
+    <div class="modal-overlay" id="sellModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>List Your Vintage Item</h2>
+                <button class="modal-close" id="closeSellModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="sellForm">
+                    <div class="form-group">
+                        <label for="itemTitle">Item Title</label>
+                        <input type="text" id="itemTitle" required placeholder="e.g., Vintage 1960s Rotary Phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="itemDescription">Description</label>
+                        <textarea id="itemDescription" required placeholder="Describe your item in detail - condition, history, measurements, etc."></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="itemCategory">Category</label>
+                            <select id="itemCategory" required>
+                                <option value="">Select category</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Fashion">Fashion & Accessories</option>
+                                <option value="Furniture">Furniture</option>
+                                <option value="Collectibles">Collectibles</option>
+                                <option value="Art">Art & Decor</option>
+                                <option value="Jewelry">Jewelry & Watches</option>
+                                <option value="Books">Books & Media</option>
+                                <option value="Toys">Toys & Games</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemCondition">Condition</label>
+                            <select id="itemCondition" required>
+                                <option value="">Select condition</option>
+                                <option value="Mint">Mint - Like New</option>
+                                <option value="Excellent">Excellent</option>
+                                <option value="Good">Good</option>
+                                <option value="Fair">Fair</option>
+                                <option value="Poor">Poor - For Parts</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="startingPrice">Starting Price ($)</label>
+                            <input type="number" id="startingPrice" required min="1" step="0.01" placeholder="50.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="auctionDuration">Auction Duration</label>
+                            <select id="auctionDuration" required>
+                                <option value="1">1 Day</option>
+                                <option value="3" selected>3 Days</option>
+                                <option value="5">5 Days</option>
+                                <option value="7">7 Days</option>
+                                <option value="10">10 Days</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Item Photos</label>
+                        <div class="image-upload">
+                            <label class="image-upload-label" for="itemImages">
+                                <div class="image-upload-icon">📷</div>
+                                <div>Click to upload photos</div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 5px;">
+                                    JPG, PNG or WEBP (Max 5 images)
+                                </div>
+                            </label>
+                            <input type="file" id="itemImages" accept="image/*" multiple>
+                        </div>
+                        <div class="image-preview" id="imagePreview"></div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Create Auction</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bid Modal -->
+    <div class="modal-overlay" id="bidModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Place Your Bid</h2>
+                <button class="modal-close" id="closeBidModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="bidAuctionId">
+                
+                <div class="bid-info">
+                    <h3 id="bidItemTitle">Item Title</h3>
+                    <div class="bid-current-price" id="bidCurrentPrice">$0.00</div>
+                    <div class="bid-minimum" id="bidMinimum">Minimum bid: $0.00</div>
+                </div>
+                
+                <form id="bidForm">
+                    <div class="form-group">
+                        <label for="bidAmount">Your Bid ($)</label>
+                        <input type="number" id="bidAmount" required min="1" step="0.01" placeholder="Enter your bid">
+                    </div>
+                    
+                    <div class="quick-bid-container">
+                        <button type="button" class="quick-bid-btn" onclick="document.getElementById('bidAmount').value = parseFloat(document.getElementById('bidAmount').min) + 5">+$5</button>
+                        <button type="button" class="quick-bid-btn" onclick="document.getElementById('bidAmount').value = parseFloat(document.getElementById('bidAmount').min) + 10">+$10</button>
+                        <button type="button" class="quick-bid-btn" onclick="document.getElementById('bidAmount').value = parseFloat(document.getElementById('bidAmount').min) + 25">+$25</button>
+                        <button type="button" class="quick-bid-btn" onclick="document.getElementById('bidAmount').value = parseFloat(document.getElementById('bidAmount').min) + 50">+$50</button>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" style="margin-top: 20px;">Place Bid</button>
+                </form>
+                
+                <div class="bid-history">
+                    <h4>Recent Bids</h4>
+                    <div id="bidHistory">
+                        <!-- Bid history will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal-overlay" id="detailsModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>Auction Details</h2>
+                <button class="modal-close" onclick="VintageShop.hideModal('detailsModal')">&times;</button>
+            </div>
+            <div class="modal-body" id="detailsContent">
+                <!-- Details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #2d3436; color: white; padding: 40px 20px; text-align: center;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p style="margin-bottom: 20px;">© 2026 Vintage Shop. All rights reserved.</p>
+            <p style="opacity: 0.7; font-size: 0.9rem;">
+                Discover unique vintage treasures. Bid with confidence. Win with joy.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/app-firebase.js"></script>
+</body>
+</html>

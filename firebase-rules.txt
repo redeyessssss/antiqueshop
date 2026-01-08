@@ -1,0 +1,86 @@
+// ============================================
+// FIREBASE SETUP INSTRUCTIONS
+// ============================================
+
+// 1. Go to Firebase Console: https://console.firebase.google.com
+// 2. Select your project: antiqueshop-43587
+
+// ============================================
+// FIRESTORE RULES (Database > Rules)
+// ============================================
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Auctions collection
+    match /auctions/{auctionId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+      allow delete: if request.auth != null && request.auth.uid == resource.data.sellerId;
+      
+      // Bids subcollection
+      match /bids/{bidId} {
+        allow read: if true;
+        allow create: if request.auth != null;
+      }
+    }
+  }
+}
+
+// ============================================
+// STORAGE RULES (Storage > Rules)
+// ============================================
+
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /auctions/{auctionId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null
+                   && request.resource.size < 5 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
+
+// ============================================
+// AUTHENTICATION SETUP
+// ============================================
+
+// 1. Go to Authentication > Sign-in method
+// 2. Enable these providers:
+//    - Email/Password
+//    - Google
+
+// For Google Sign-In:
+// 1. Click on Google provider
+// 2. Enable it
+// 3. Add your project support email
+// 4. Save
+
+// ============================================
+// AUTHORIZED DOMAINS
+// ============================================
+
+// Go to Authentication > Settings > Authorized domains
+// Add your deployment domain (e.g., yourdomain.com, yoursite.netlify.app)
+
+// ============================================
+// FIRESTORE INDEXES (if needed)
+// ============================================
+
+// The app may prompt you to create indexes.
+// Click the link in the console error to auto-create them.
+// Or manually create:
+// Collection: auctions
+// Fields: createdAt (Descending)
+
+// Collection: bids (under auctions)
+// Fields: timestamp (Descending)
