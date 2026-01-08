@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1200">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Vintage Shop</title>
     <link href="vintage-shop-dfc777.webflow.shared.2ce141050.css" rel="stylesheet" type="text/css">
     <link href="bidding.css" rel="stylesheet" type="text/css">
@@ -304,12 +304,118 @@
         
         /* Responsive */
         @media (max-width: 768px) {
+            .main-nav {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .page-header {
+                padding: 50px 20px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .about-content {
+                padding: 50px 20px;
+            }
+            
+            .about-section {
+                margin-bottom: 40px;
+            }
+            
+            .about-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .about-section p {
+                font-size: 1rem;
+            }
+            
             .story-grid {
                 grid-template-columns: 1fr;
+                gap: 25px;
+                margin: 40px 0;
             }
-            .page-header h1 { font-size: 2.2rem; }
-            .main-nav { padding: 15px 20px; }
-            .nav-links { display: none; }
+            
+            .story-image img {
+                height: 250px;
+            }
+            
+            .values-grid {
+                gap: 15px;
+            }
+            
+            .value-card {
+                padding: 25px 20px;
+            }
+            
+            .value-icon {
+                font-size: 2rem;
+            }
+            
+            .stats-section {
+                padding: 40px 20px;
+                margin: 40px 0;
+                border-radius: 15px;
+            }
+            
+            .stats-grid {
+                gap: 20px;
+            }
+            
+            .stat-item h3 {
+                font-size: 2rem;
+            }
+            
+            .team-grid {
+                gap: 25px;
+            }
+            
+            .team-avatar {
+                width: 90px;
+                height: 90px;
+                font-size: 2rem;
+            }
+            
+            .contact-cta {
+                padding: 40px 20px;
+                border-radius: 15px;
+            }
+            
+            .contact-cta h2 {
+                font-size: 1.5rem;
+            }
+            
+            .contact-cta p {
+                font-size: 1rem;
+            }
+            
+            .contact-btn {
+                padding: 13px 30px;
+            }
+            
+            .footer {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .page-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .nav-logo span {
+                font-size: 1.1rem !important;
+            }
         }
     </style>
 </head>

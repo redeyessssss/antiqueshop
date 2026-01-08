@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1200">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vintage Shop - Discover Unique Treasures</title>
     <link href="vintage-shop-dfc777.webflow.shared.2ce141050.css" rel="stylesheet" type="text/css">
     <link href="bidding.css" rel="stylesheet" type="text/css">
@@ -330,10 +330,124 @@
         
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .main-nav { padding: 15px 20px; }
-            .nav-links { display: none; }
-            .section-title h2 { font-size: 2rem; }
+            .main-nav {
+                padding: 15px 20px;
+                position: relative;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.3;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+            
+            .hero-content {
+                padding: 40px 20px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .hero-btn {
+                width: 100%;
+                text-align: center;
+                padding: 14px 25px;
+            }
+            
+            .features {
+                padding: 60px 20px;
+            }
+            
+            .section-title {
+                margin-bottom: 40px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title p {
+                font-size: 1rem;
+            }
+            
+            .features-grid {
+                gap: 20px;
+            }
+            
+            .feature-card {
+                padding: 30px 20px;
+            }
+            
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.15rem;
+            }
+            
+            .how-it-works {
+                padding: 60px 20px;
+            }
+            
+            .steps-grid {
+                gap: 30px;
+            }
+            
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            
+            .cta-section {
+                padding: 50px 20px;
+            }
+            
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-section p {
+                font-size: 1rem;
+            }
+            
+            .cta-btn {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+            
+            .footer {
+                padding: 40px 20px 25px;
+            }
+            
+            .footer-content {
+                gap: 30px;
+            }
+            
+            .footer-section h4 {
+                margin-bottom: 15px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            
+            .nav-logo span {
+                font-size: 1.1rem !important;
+            }
         }
     </style>
 </head>
