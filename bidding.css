@@ -1161,3 +1161,431 @@ select option {
     color: #2d3436;
     background: #ffffff;
 }
+
+
+/* ========================================
+   MOBILE RESPONSIVE STYLES
+   ======================================== */
+
+/* Mobile Navigation */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+@media (max-width: 768px) {
+    /* Navigation */
+    .nav_container {
+        flex-wrap: wrap;
+        padding: 15px !important;
+    }
+    
+    .nav_center {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 0;
+        order: 3;
+    }
+    
+    .nav_center.active {
+        display: flex;
+    }
+    
+    .nav_right.nav-actions {
+        gap: 10px;
+    }
+    
+    .sell-btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+    
+    #authBtn {
+        padding: 8px 15px !important;
+        font-size: 0.9rem;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .user-menu {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-end;
+    }
+    
+    .user-name {
+        font-size: 0.9rem;
+    }
+    
+    /* Section Header */
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .section-header p {
+        font-size: 1rem;
+    }
+    
+    /* Controls Bar */
+    .controls-bar {
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .filter-buttons {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .filter-btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .search-box {
+        min-width: 100%;
+        width: 100%;
+    }
+    
+    .search-box input {
+        padding: 10px 15px 10px 40px;
+    }
+    
+    /* Auctions Grid */
+    .auctions-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    /* Auction Card */
+    .auction-card {
+        border-radius: 10px;
+    }
+    
+    .auction-image {
+        height: 200px;
+    }
+    
+    .auction-details {
+        padding: 15px;
+    }
+    
+    .auction-title {
+        font-size: 1.1rem;
+    }
+    
+    .auction-description {
+        font-size: 0.85rem;
+    }
+    
+    .auction-meta {
+        flex-wrap: wrap;
+    }
+    
+    .category-tag, .condition-tag {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+    }
+    
+    .current-bid .price {
+        font-size: 1.3rem;
+    }
+    
+    .auction-actions {
+        flex-direction: column;
+    }
+    
+    .bid-button, .details-button {
+        width: 100%;
+        padding: 12px;
+    }
+    
+    /* Modals */
+    .modal-overlay {
+        padding: 10px;
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+    
+    .modal-content {
+        max-height: calc(100vh - 40px);
+        border-radius: 12px;
+        margin: 0;
+    }
+    
+    .modal-content.large {
+        max-width: 100%;
+    }
+    
+    .modal-header {
+        padding: 20px 15px 0;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .modal-body {
+        padding: 20px 15px;
+    }
+    
+    /* Forms */
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .form-group label {
+        font-size: 0.9rem;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 10px 12px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .submit-btn {
+        padding: 14px;
+        font-size: 1rem;
+    }
+    
+    /* Image Upload */
+    .image-upload {
+        padding: 20px;
+    }
+    
+    .image-upload-icon {
+        font-size: 2rem;
+    }
+    
+    .preview-image {
+        width: 60px;
+        height: 60px;
+    }
+    
+    /* Bid Modal */
+    .bid-info {
+        padding: 15px;
+    }
+    
+    .bid-info h3 {
+        font-size: 1rem;
+    }
+    
+    .bid-current-price {
+        font-size: 1.6rem;
+    }
+    
+    .quick-bid-container {
+        flex-wrap: wrap;
+    }
+    
+    .quick-bid-btn {
+        flex: 1;
+        min-width: 60px;
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+    
+    /* Bid History */
+    .bid-history {
+        max-height: 150px;
+    }
+    
+    .bid-history-item {
+        padding: 8px 0;
+        font-size: 0.9rem;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    
+    .bidder-name {
+        flex: 1;
+        min-width: 100px;
+    }
+    
+    /* Details Modal */
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .details-images .main-image img {
+        height: 250px;
+    }
+    
+    .thumbnail-images {
+        justify-content: center;
+    }
+    
+    .thumbnail {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .details-info h2 {
+        font-size: 1.4rem;
+    }
+    
+    .details-pricing {
+        padding: 15px;
+    }
+    
+    .price-row {
+        font-size: 0.9rem;
+    }
+    
+    .current-price {
+        font-size: 1.3rem !important;
+    }
+    
+    .time-remaining {
+        padding: 12px 15px;
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+    }
+    
+    .time-remaining .time {
+        font-size: 1.1rem;
+    }
+    
+    .bid-button.large {
+        padding: 14px 20px;
+        font-size: 1rem;
+    }
+    
+    /* Notifications */
+    .notifications-container {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+    }
+    
+    .notification {
+        min-width: auto;
+        max-width: 100%;
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
+    
+    /* Footer */
+    footer {
+        padding: 30px 15px !important;
+    }
+    
+    footer p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 380px) {
+    .nav_logo span, .nav_logo div {
+        font-size: 1rem !important;
+    }
+    
+    .sell-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    #authBtn {
+        padding: 6px 12px !important;
+        font-size: 0.8rem;
+    }
+    
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .auction-image {
+        height: 180px;
+    }
+    
+    .current-bid .price {
+        font-size: 1.2rem;
+    }
+    
+    .quick-bid-btn {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Tablet landscape */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .auctions-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .controls-bar {
+        flex-wrap: wrap;
+    }
+    
+    .filter-buttons {
+        flex-wrap: wrap;
+    }
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+    .auction-card:hover {
+        transform: none;
+    }
+    
+    .bid-button:hover,
+    .details-button:hover,
+    .filter-btn:hover {
+        transform: none;
+    }
+    
+    .auction-card:active {
+        transform: scale(0.98);
+    }
+    
+    .bid-button:active,
+    .details-button:active {
+        transform: scale(0.95);
+    }
+}
+
+/* Safe area for notched phones */
+@supports (padding: max(0px)) {
+    .modal-overlay {
+        padding-top: max(20px, env(safe-area-inset-top));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+        padding-left: max(10px, env(safe-area-inset-left));
+        padding-right: max(10px, env(safe-area-inset-right));
+    }
+    
+    .notifications-container {
+        top: max(10px, env(safe-area-inset-top));
+    }
+}
