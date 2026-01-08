@@ -307,44 +307,9 @@
             .story-grid {
                 grid-template-columns: 1fr;
             }
-            .page-header h1 { font-size: 1.8rem; }
-            .page-header { padding: 50px 20px; }
-            .page-header p { font-size: 1rem; }
+            .page-header h1 { font-size: 2.2rem; }
             .main-nav { padding: 15px 20px; }
             .nav-links { display: none; }
-            .nav-links.active {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: #2d3436;
-                padding: 20px;
-                gap: 15px;
-            }
-            .mobile-menu-btn { display: block; }
-            .about-content { padding: 50px 20px; }
-            .about-section h2 { font-size: 1.5rem; }
-            .about-section p { font-size: 1rem; }
-            .values-grid { gap: 20px; }
-            .value-card { padding: 25px 20px; }
-            .stats-section { padding: 40px 20px; margin: 40px 0; }
-            .stat-item h3 { font-size: 2rem; }
-            .team-grid { gap: 20px; }
-            .team-avatar { width: 100px; height: 100px; font-size: 2rem; }
-            .contact-cta { padding: 40px 20px; }
-            .contact-cta h2 { font-size: 1.5rem; }
-            .story-image img { height: 300px; }
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -363,7 +328,6 @@
             <a href="about.html" class="active">About</a>
             <a href="bidding.html" class="nav-cta">Start Bidding</a>
         </div>
-        <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</button>
     </nav>
 
     <!-- Page Header -->
